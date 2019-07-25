@@ -1,4 +1,6 @@
-﻿using OpenSheets.Core;
+﻿using OpenSheets.Contracts.Requests;
+using OpenSheets.Contracts.Responses;
+using OpenSheets.Core;
 using OpenSheets.Core.Hexagon;
 using OpenSheets.Core.Utilities;
 using OpenSheets.Services.Storage;

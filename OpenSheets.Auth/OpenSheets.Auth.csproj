@@ -215,13 +215,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\IdentityController.cs" />
-    <Compile Include="Requests\RegisterRequest.cs" />
-    <Compile Include="Commands\RegisterPrincipalCommand.cs" />
-    <Compile Include="Commands\SendPasswordResetCommand.cs" />
-    <Compile Include="Commands\SetPasswordCommand.cs" />
-    <Compile Include="Requests\LoginRequest.cs" />
-    <Compile Include="Responses\LoginResponse.cs" />
-    <Compile Include="Events\LoginAttemptEvent.cs" />
+    <Compile Include="Models\Requests\RegisterRequest.cs" />
+    <Compile Include="Models\Requests\LoginRequest.cs" />
+    <Compile Include="Models\Responses\LoginResponse.cs" />
     <Compile Include="Middlewares\AuthenticationMiddleware.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -230,6 +226,10 @@
     <ProjectReference Include="..\OpenSheets.Common\OpenSheets.Common.csproj">
       <Project>{EF6BBDF3-E168-430E-AFC4-C99ADE3E3C13}</Project>
       <Name>OpenSheets.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenSheets.Contracts\OpenSheets.Contracts.csproj">
+      <Project>{C5033943-AA47-4296-BF00-4AFDA6005135}</Project>
+      <Name>OpenSheets.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenSheets.Core\OpenSheets.Core.csproj">
       <Project>{81D02570-FD1C-4F27-93AD-03E132F89D1A}</Project>
@@ -243,13 +243,15 @@
       <Project>{82943F17-DD25-4415-9CB3-91A6353D9482}</Project>
       <Name>OpenSheets.Storage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenSheets.Web\OpenSheets.Web.csproj">
+      <Project>{76EF6518-E25D-43D4-A188-1F3FD5949868}</Project>
+      <Name>OpenSheets.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
+using OpenSheets.Contracts.Requests;
+using OpenSheets.Contracts.Responses;
 using OpenSheets.Core.Hexagon;
 
 namespace OpenSheets.Services.Handlers

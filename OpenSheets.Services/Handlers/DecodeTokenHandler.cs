@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using OpenSheets.Common;
+using OpenSheets.Contracts.Requests;
+using OpenSheets.Contracts.Responses;
 using OpenSheets.Core.Hexagon;
 
 namespace OpenSheets.Services.Handlers

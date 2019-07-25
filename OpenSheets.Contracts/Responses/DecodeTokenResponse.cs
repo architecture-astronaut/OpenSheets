@@ -1,4 +1,6 @@
-﻿namespace OpenSheets.Contracts.Responses
+﻿using OpenSheets.Common;
+
+namespace OpenSheets.Contracts.Responses
 {
     public class DecodeTokenResponse
     {

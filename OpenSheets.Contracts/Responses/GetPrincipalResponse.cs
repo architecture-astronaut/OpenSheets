@@ -1,4 +1,6 @@
-﻿namespace OpenSheets.Contracts.Responses
+﻿using OpenSheets.Core;
+
+namespace OpenSheets.Contracts.Responses
 {
     public class GetPrincipalResponse
     {

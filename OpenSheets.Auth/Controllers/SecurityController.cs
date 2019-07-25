@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Remoting.Contexts;
+using System.Web.Configuration;
 using System.Web.Http;
 using OpenSheets.Auth.Commands;
 using OpenSheets.Auth.Events;
 using OpenSheets.Auth.Requests;
 using OpenSheets.Auth.Responses;
 using OpenSheets.Common;
+using OpenSheets.Contracts.Requests;
+using OpenSheets.Contracts.Responses;
 using OpenSheets.Core;
 using OpenSheets.Core.Hexagon;
 using OpenSheets.Storage;
+using OpenSheets.Web;
 
 namespace OpenSheets.Auth.Controllers
 {
@@ -19,7 +24,7 @@ namespace OpenSheets.Auth.Controllers
     {
         private readonly IServiceRouter _router;
 
-        public SecurityController(WebContext context, IServiceRouter router) : base(context)
+        public SecurityController(IWebContext context, IServiceRouter router) : base(context)
         {
             _router = router;
         }

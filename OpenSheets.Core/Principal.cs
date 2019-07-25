@@ -15,6 +15,7 @@ namespace OpenSheets.Core
         public HashSet<PrincipalFlag> Flags { get; set; }
         public PrincipalKind Kind { get; set; }
         public Dictionary<string, object> Metadata { get; set; }
+        public Guid Version { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
     }
