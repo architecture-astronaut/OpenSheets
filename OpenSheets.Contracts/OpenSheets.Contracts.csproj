@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Marvin.JsonPatch, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Marvin.JsonPatch.2.1.1\lib\portable40-net40+win8\Marvin.JsonPatch.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,9 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CreateIdentityCommand.cs" />
+    <Compile Include="Commands\PatchCommand.cs" />
     <Compile Include="Commands\RegisterPrincipalCommand.cs" />
     <Compile Include="Commands\SendPasswordResetCommand.cs" />
     <Compile Include="Commands\SetPasswordCommand.cs" />
+    <Compile Include="Events\IdentityUpdatedEvent.cs" />
     <Compile Include="Events\LoginAttemptEvent.cs" />
     <Compile Include="Events\PasswordSetEvent.cs" />
     <Compile Include="Events\PrincipalCreatedEvent.cs" />
@@ -54,6 +62,8 @@
     <Compile Include="Requests\DecryptRequest.cs" />
     <Compile Include="Requests\EncryptRequest.cs" />
     <Compile Include="Requests\GenerateTokenRequest.cs" />
+    <Compile Include="Requests\GetIdentitiesByPrincipalRequest.cs" />
+    <Compile Include="Requests\GetIdentityByIdRequest.cs" />
     <Compile Include="Requests\GetPrincipalByEmailRequest.cs" />
     <Compile Include="Requests\GetPrincipalByIdRequest.cs" />
     <Compile Include="Responses\CheckCredentialResponse.cs" />
@@ -61,6 +71,8 @@
     <Compile Include="Responses\DecryptResponse.cs" />
     <Compile Include="Responses\EncryptResponse.cs" />
     <Compile Include="Responses\GenerateTokenResponse.cs" />
+    <Compile Include="Responses\GetIdentitiesResponse.cs" />
+    <Compile Include="Responses\GetIdentityResponse.cs" />
     <Compile Include="Responses\GetPrincipalResponse.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +84,10 @@
       <Project>{81D02570-FD1C-4F27-93AD-03E132F89D1A}</Project>
       <Name>OpenSheets.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

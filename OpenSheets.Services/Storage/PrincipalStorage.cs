@@ -32,7 +32,7 @@ namespace OpenSheets.Services.Storage
             return _storage.Collection.Find(x => x.Id == principalId).FirstOrDefault();
         }
 
-        public void SavePrincipal(Principal principal)
+        public void SavePrincipal(Principal principal, Guid? newVersion = null)
         {
             Principal currentPrincipal = GetPrincipalById(principal.Id);
 
@@ -42,7 +42,15 @@ namespace OpenSheets.Services.Storage
             }
 
             principal.Updated = _clock.GetCurrentInstant().ToDateTimeUtc();
-            principal.Version = Guid.NewGuid();
+
+            if (newVersion == null)
+            {
+                principal.Version = Guid.NewGuid();
+            }
+            else
+            {
+                principal.Version = newVersion.Value;
+            }
 
             _storage.Collection.ReplaceOne(p => p.Id == principal.Id, principal);
             _storage.Historical.InsertOne(currentPrincipal);

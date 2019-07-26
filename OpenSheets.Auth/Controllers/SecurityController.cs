@@ -6,11 +6,11 @@ using System.Net.Http;
 using System.Runtime.Remoting.Contexts;
 using System.Web.Configuration;
 using System.Web.Http;
-using OpenSheets.Auth.Commands;
-using OpenSheets.Auth.Events;
 using OpenSheets.Auth.Requests;
 using OpenSheets.Auth.Responses;
 using OpenSheets.Common;
+using OpenSheets.Contracts.Commands;
+using OpenSheets.Contracts.Events;
 using OpenSheets.Contracts.Requests;
 using OpenSheets.Contracts.Responses;
 using OpenSheets.Core;
@@ -46,16 +46,13 @@ namespace OpenSheets.Auth.Controllers
 
             if (!checkResp.Success)
             {
-                _router.Command(new PushEvent()
+                _router.Push<LoginAttemptEvent>(evt =>
                 {
-                    Event = new LoginAttemptEvent()
-                    {
-                        PrincipalId = checkResp.PrincipalId,
-                        Browser = Context.Client.UA.Family,
-                        System = Context.Client.OS.Family,
-                        Device = $"{Context.Client.Device.Family} {Context.Client.Device.Brand} {Context.Client.Device.Model}",
-                        RemoteAddress = Request.GetOwinContext().Request.RemoteIpAddress
-                    }
+                    evt.PrincipalId = checkResp.PrincipalId;
+                    evt.Browser = Context.Client.UA.Family;
+                    evt.System = Context.Client.OS.Family;
+                    evt.Device = $"{Context.Client.Device.Family} {Context.Client.Device.Brand} {Context.Client.Device.Model}";
+                    evt.RemoteAddress = Request.GetOwinContext().Request.RemoteIpAddress;
                 });
 
                 return Request.CreateResponse(HttpStatusCode.Unauthorized);

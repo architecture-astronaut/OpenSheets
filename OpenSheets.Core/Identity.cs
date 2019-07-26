@@ -11,6 +11,7 @@ namespace OpenSheets.Core
         public HashSet<IdentityFlag> Flags { get; set; }
         public Dictionary<string, object> Metadata { get; set; }
         public IdentityKind Kind { get; set; }
+        public Guid Version { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
     }

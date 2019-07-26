@@ -18,12 +18,4 @@ namespace OpenSheets.Core.Hexagon
 
         public abstract void Command(TRequest request, IServiceRouter router, RequestContext context);
     }
-
-    public class PushEventHandler : HandleCommand<PushEvent>
-    {
-        public override void Command(PushEvent request, IServiceRouter router, RequestContext context)
-        {
-            //Push Event To Bus?
-        }
-    }
 }

@@ -1,6 +1,6 @@
 ﻿using OpenSheets.Core;
 
-namespace OpenSheets.Auth.Commands
+namespace OpenSheets.Contracts.Commands
 {
     public class RegisterPrincipalCommand
     {

@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using NotImplementedException = System.NotImplementedException;
 
 namespace OpenSheets.Core.Hexagon
 {
@@ -41,6 +43,11 @@ namespace OpenSheets.Core.Hexagon
             HandleCommand<TRequest> handler = _resolver.Resolve<HandleCommand<TRequest>>();
 
             await handler.CommandAsync(request, this, ContextScopeManager.Current);
+        }
+
+        public Task Push<TEvent>(Action<TEvent> evt)
+        {
+            return Task.CompletedTask;
         }
     }
 }

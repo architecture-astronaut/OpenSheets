@@ -1,8 +1,8 @@
 ﻿using OpenSheets.Core;
 
-namespace OpenSheets.Contracts.Commands
+namespace OpenSheets.Auth.Controllers
 {
-    public class CreateIdentityCommand
+    public class GetIdentityResponse
     {
         public Identity Identity { get; set; }
     }

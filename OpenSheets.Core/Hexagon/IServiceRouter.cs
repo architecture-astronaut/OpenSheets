@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,6 @@ namespace OpenSheets.Core.Hexagon
         Task<TResult> QueryAsync<TRequest, TResult>(TRequest request);
         void Command<TRequest>(TRequest request);
         Task CommandAsync<TRequest>(TRequest request);
-    }
-
-    public class PushEvent
-    {
-        public object Event { get; set; }
+        Task Push<TEvent>(Action<TEvent> evt);
     }
 }

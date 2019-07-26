@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenSheets.Auth.Commands
+namespace OpenSheets.Contracts.Commands
 {
     public class SendPasswordResetCommand
     {
