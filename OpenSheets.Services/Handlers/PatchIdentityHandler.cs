@@ -1,4 +1,5 @@
-﻿using OpenSheets.Contracts.Commands;
+﻿using System.Linq;
+using OpenSheets.Contracts.Commands;
 using OpenSheets.Core;
 using OpenSheets.Core.Hexagon;
 using OpenSheets.Services.Storage;

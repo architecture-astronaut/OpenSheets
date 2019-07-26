@@ -91,6 +91,7 @@
     <Compile Include="Handlers\PatchIdentityHandler.cs" />
     <Compile Include="Handlers\RegisterPrincipalHandler.cs" />
     <Compile Include="Handlers\SetPasswordHandler.cs" />
+    <Compile Include="Handlers\ValidateIdentityPatchHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage\IdentityStorage.cs" />
     <Compile Include="Storage\PrincipalStorage.cs" />

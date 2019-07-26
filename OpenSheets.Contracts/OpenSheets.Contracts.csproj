@@ -48,10 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CreateIdentityCommand.cs" />
+    <Compile Include="Enums\Level.cs" />
     <Compile Include="Commands\PatchCommand.cs" />
     <Compile Include="Commands\RegisterPrincipalCommand.cs" />
     <Compile Include="Commands\SendPasswordResetCommand.cs" />
     <Compile Include="Commands\SetPasswordCommand.cs" />
+    <Compile Include="Requests\ValidatePatchRequest.cs" />
+    <Compile Include="Responses\ValidatePatchResponse.cs" />
+    <Compile Include="Models\ValidationResult.cs" />
     <Compile Include="Events\IdentityUpdatedEvent.cs" />
     <Compile Include="Events\LoginAttemptEvent.cs" />
     <Compile Include="Events\PasswordSetEvent.cs" />

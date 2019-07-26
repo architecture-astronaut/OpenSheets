@@ -93,8 +93,13 @@ namespace OpenSheets.Auth.Controllers
 
         [HttpPatch]
         [Route("api/identity/{identityId}/patch/{version}")]
-        public HttpResponseMessage PatchIdentity(Guid identityId, Guid version, [FromBody] JsonPatchDocument<Identity> model)
+        public HttpResponseMessage PatchIdentity(Guid identityId, Guid version, [FromBody] JsonPatchDocument<Identity> model, [FromUri] Level bypassLevel = Level.Information)
         {
+            if (bypassLevel > Level.Warning && (Level) Context.Principal.Metadata["Allowed-Bypass"] < bypassLevel)
+            {
+                return Request.CreateResponse(HttpStatusCode.Forbidden, new {Reason = $"Attempted to bypass validation of {bypassLevel} level, only allowed { (Level?)Context.Principal.Metadata["Allowed-Bypass"] ?? Level.Warning }"});
+            }
+
             if (identityId == Guid.Empty)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
@@ -113,6 +118,17 @@ namespace OpenSheets.Auth.Controllers
             if (response.Identity.Version != version)
             {
                 return Request.CreateResponse(HttpStatusCode.Conflict);
+            }
+
+            ValidatePatchResponse validateResp = _router.Query<ValidatePatchRequest<Identity>, ValidatePatchResponse>(new ValidatePatchRequest<Identity>()
+            {
+                ObjectId = identityId,
+                ProposedPatch = model
+            });
+
+            if (validateResp.Results.Any(x => x.Level > bypassLevel))
+            {
+                return Request.CreateResponse((HttpStatusCode) 422, new { Validation = new { Errors = validateResp.Results } });
             }
 
             PatchCommand<Identity> request = new PatchCommand<Identity>()
