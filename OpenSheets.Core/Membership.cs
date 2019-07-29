@@ -9,6 +9,7 @@ namespace OpenSheets.Core
         public Guid IdentityId { get; set; }
         public Guid OrganizationId { get; set; }
         public HashSet<MembershipFlag> Flags { get; set; }
+        public HashSet<Guid> Roles { get; set; }
         public MembershipKind Kind { get; set; }
         public Dictionary<string, object> Metadata { get; set; }
         public DateTime Created { get; set; }
