@@ -224,6 +224,8 @@
   <ItemGroup>
     <Compile Include="AuthenticationConfiguration.cs" />
     <Compile Include="ContextedController.cs" />
+    <Compile Include="FromHeaderAttribute.cs" />
+    <Compile Include="FromHeaderProvider.cs" />
     <Compile Include="IWebContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerConfiguration.cs" />

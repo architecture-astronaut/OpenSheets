@@ -17,7 +17,7 @@ namespace OpenSheets.Services.Handlers
 
         public override void Command(PatchCommand<Identity> request, IServiceRouter router, RequestContext context)
         {
-            Identity identity = _storage.GetIdentityById(request.IdentityId);
+            Identity identity = _storage.GetIdentityById(request.ObjectId);
 
             request.Patch.ApplyTo(identity);
 

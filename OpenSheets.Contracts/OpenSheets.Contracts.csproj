@@ -48,12 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CreateIdentityCommand.cs" />
+    <Compile Include="Commands\UpdateCommand.cs" />
     <Compile Include="Enums\Level.cs" />
     <Compile Include="Commands\PatchCommand.cs" />
     <Compile Include="Commands\RegisterPrincipalCommand.cs" />
     <Compile Include="Commands\SendPasswordResetCommand.cs" />
     <Compile Include="Commands\SetPasswordCommand.cs" />
     <Compile Include="Requests\ValidatePatchRequest.cs" />
+    <Compile Include="Requests\ValidateRequest.cs" />
     <Compile Include="Responses\ValidatePatchResponse.cs" />
     <Compile Include="Models\ValidationResult.cs" />
     <Compile Include="Events\IdentityUpdatedEvent.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Responses\GetIdentitiesResponse.cs" />
     <Compile Include="Responses\GetIdentityResponse.cs" />
     <Compile Include="Responses\GetPrincipalResponse.cs" />
+    <Compile Include="Responses\ValidateResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenSheets.Common\OpenSheets.Common.csproj">

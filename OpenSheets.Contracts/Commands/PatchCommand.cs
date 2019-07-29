@@ -5,7 +5,7 @@ namespace OpenSheets.Contracts.Commands
 {
     public class PatchCommand<T> where T : class
     {
-        public Guid IdentityId { get; set; }
+        public Guid ObjectId { get; set; }
         public Guid NewVersion { get; set; }
         public JsonPatchDocument<T> Patch { get; set; }
     }

@@ -52,9 +52,33 @@ namespace OpenSheets.Auth.Controllers
 
         [HttpPut]
         [Route("api/identity/create")]
-        public HttpResponseMessage CreateIdentity(Identity model)
+        public HttpResponseMessage CreateIdentity([FromBody]Identity model, [FromHeader(Name = "opensheets-bypass-level")] Level bypassLevel = Level.Information)
         {
-            return Request.CreateResponse(HttpStatusCode.NotImplemented);
+            if (model.PrincipalId != Context.Principal.Id && !Context.Identity.Flags.Contains(IdentityFlag.SysAdmin))
+            {
+                return Request.CreateResponse(HttpStatusCode.Forbidden);
+            }
+
+            ValidateResponse validateResp = _router.Query<ValidateRequest<Identity>, ValidateResponse>(
+                new ValidateRequest<Identity>()
+                {
+                    ObjectId = Guid.Empty,
+                    Object = model
+                });
+            
+            if (validateResp.Results.Any(x => x.Level > Level.Information))
+            {
+                return Request.CreateResponse((HttpStatusCode)422, new { Validation = new { Errors = validateResp.Results } });
+            }
+
+            model.Id = Guid.NewGuid();
+
+            _router.Command(new CreateCommand<Identity>()
+            {
+                Object = model
+            });
+
+            return Request.CreateResponse(HttpStatusCode.OK, new {Id = model.Id});
         }
 
         [HttpGet]
@@ -151,7 +175,28 @@ namespace OpenSheets.Auth.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            return Request.CreateResponse(HttpStatusCode.NotImplemented);
+            GetIdentityResponse response = _router.Query<GetIdentityByIdRequest, GetIdentityResponse>(new GetIdentityByIdRequest()
+            {
+                IdentityId = identityId
+            });
+
+            if (response.Identity == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            if (Context.Principal.Id != response.Identity.PrincipalId && !Context.Identity.Flags.Contains(IdentityFlag.SysAdmin))
+            {
+                return Request.CreateResponse(HttpStatusCode.Forbidden);
+            }
+
+            _router.Command(new RemoveCommand<Identity>()
+            {
+                ObjectId = identityId,
+                Object = response.Identity
+            });
+
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }
