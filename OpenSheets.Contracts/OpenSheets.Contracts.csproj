@@ -47,15 +47,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CreateIdentityCommand.cs" />
+    <Compile Include="Commands\CreateCommand.cs" />
+    <Compile Include="Commands\RemoveCommand.cs" />
     <Compile Include="Commands\UpdateCommand.cs" />
     <Compile Include="Enums\Level.cs" />
     <Compile Include="Commands\PatchCommand.cs" />
-    <Compile Include="Commands\RegisterPrincipalCommand.cs" />
-    <Compile Include="Commands\SendPasswordResetCommand.cs" />
-    <Compile Include="Commands\SetPasswordCommand.cs" />
+    <Compile Include="Commands\Security\SendPasswordResetCommand.cs" />
+    <Compile Include="Commands\Security\SetPasswordCommand.cs" />
+    <Compile Include="Requests\File\BuildPathRequest.cs" />
+    <Compile Include="Requests\File\CheckPermissionRequest.cs" />
+    <Compile Include="Requests\File\EnumerateDirectoryRequest.cs" />
+    <Compile Include="Requests\File\GetFileRequest.cs" />
     <Compile Include="Requests\ValidatePatchRequest.cs" />
     <Compile Include="Requests\ValidateRequest.cs" />
+    <Compile Include="Responses\File\BuildPathResponse.cs" />
+    <Compile Include="Responses\File\CheckPermissionResponse.cs" />
+    <Compile Include="Responses\File\EnumerateDirectoryResponse.cs" />
+    <Compile Include="Responses\GetCollectionResponse.cs" />
+    <Compile Include="Responses\GetPagedCollectionResponse.cs" />
+    <Compile Include="Responses\GetResponse.cs" />
     <Compile Include="Responses\ValidatePatchResponse.cs" />
     <Compile Include="Models\ValidationResult.cs" />
     <Compile Include="Events\IdentityUpdatedEvent.cs" />
@@ -63,23 +73,20 @@
     <Compile Include="Events\PasswordSetEvent.cs" />
     <Compile Include="Events\PrincipalCreatedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Requests\CheckCredentialRequest.cs" />
-    <Compile Include="Requests\DecodeTokenRequest.cs" />
-    <Compile Include="Requests\DecryptRequest.cs" />
-    <Compile Include="Requests\EncryptRequest.cs" />
-    <Compile Include="Requests\GenerateTokenRequest.cs" />
-    <Compile Include="Requests\GetIdentitiesByPrincipalRequest.cs" />
-    <Compile Include="Requests\GetIdentityByIdRequest.cs" />
-    <Compile Include="Requests\GetPrincipalByEmailRequest.cs" />
-    <Compile Include="Requests\GetPrincipalByIdRequest.cs" />
-    <Compile Include="Responses\CheckCredentialResponse.cs" />
-    <Compile Include="Responses\DecodeTokenResponse.cs" />
-    <Compile Include="Responses\DecryptResponse.cs" />
-    <Compile Include="Responses\EncryptResponse.cs" />
-    <Compile Include="Responses\GenerateTokenResponse.cs" />
-    <Compile Include="Responses\GetIdentitiesResponse.cs" />
-    <Compile Include="Responses\GetIdentityResponse.cs" />
-    <Compile Include="Responses\GetPrincipalResponse.cs" />
+    <Compile Include="Requests\Security\CheckCredentialRequest.cs" />
+    <Compile Include="Requests\Security\DecodeTokenRequest.cs" />
+    <Compile Include="Requests\Security\DecryptRequest.cs" />
+    <Compile Include="Requests\Security\EncryptRequest.cs" />
+    <Compile Include="Requests\Security\GenerateTokenRequest.cs" />
+    <Compile Include="Requests\Identity\GetIdentitiesByPrincipalRequest.cs" />
+    <Compile Include="Requests\Identity\GetIdentityByIdRequest.cs" />
+    <Compile Include="Requests\Principal\GetPrincipalByEmailRequest.cs" />
+    <Compile Include="Requests\Principal\GetPrincipalByIdRequest.cs" />
+    <Compile Include="Responses\Security\CheckCredentialResponse.cs" />
+    <Compile Include="Responses\Security\DecodeTokenResponse.cs" />
+    <Compile Include="Responses\Security\DecryptResponse.cs" />
+    <Compile Include="Responses\Security\EncryptResponse.cs" />
+    <Compile Include="Responses\Security\GenerateTokenResponse.cs" />
     <Compile Include="Responses\ValidateResponse.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +102,17 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\File\" />
+    <Folder Include="Commands\Identity\" />
+    <Folder Include="Commands\Principal\" />
+    <Folder Include="Events\File\" />
+    <Folder Include="Events\Identity\" />
+    <Folder Include="Events\Principal\" />
+    <Folder Include="Events\Security\" />
+    <Folder Include="Responses\Identity\" />
+    <Folder Include="Responses\Principal\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

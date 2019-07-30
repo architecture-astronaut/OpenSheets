@@ -97,9 +97,9 @@ namespace OpenSheets.Auth.Controllers
 
             try
             {
-                _router.Command(new RegisterPrincipalCommand()
+                _router.Command(new CreateCommand<Principal>()
                 {
-                    Principal = principal
+                    Object = principal
                 });
             }
             catch (StorageException ex)
@@ -114,12 +114,12 @@ namespace OpenSheets.Auth.Controllers
         [Route("api/security/forgot")]
         public HttpResponseMessage ForgotPassword([FromBody] string email)
         {
-            GetPrincipalResponse principalResp = _router.Query<GetPrincipalByEmailRequest, GetPrincipalResponse>(new GetPrincipalByEmailRequest()
+            GetResponse<Principal> principalResp = _router.Query<GetPrincipalByEmailRequest, GetResponse<Principal>>(new GetPrincipalByEmailRequest()
             {
                 Email = email
             });
 
-            if (principalResp.Principal == null)
+            if (principalResp.Result == null)
             {
                 if (Context.ServerConfig.AuthConfig.IndicateBadResetEmail)
                 {
@@ -133,7 +133,7 @@ namespace OpenSheets.Auth.Controllers
 
             _router.Command(new SendPasswordResetCommand()
             {
-                PrincipalId = principalResp.Principal.Id
+                PrincipalId = principalResp.Result.Id
             });
 
             return Request.CreateResponse(HttpStatusCode.OK);

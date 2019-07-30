@@ -4,12 +4,13 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenSheets.Contracts.Commands;
 using OpenSheets.Contracts.Events;
+using OpenSheets.Core;
 using OpenSheets.Core.Hexagon;
 using OpenSheets.Services.Storage;
 
 namespace OpenSheets.Services.Handlers
 {
-    public class RegisterPrincipalHandler : HandleCommand<RegisterPrincipalCommand>
+    public class RegisterPrincipalHandler : HandleCommand<CreateCommand<Principal>>
     {
         private readonly PrincipalStorage _storage;
 
@@ -18,11 +19,11 @@ namespace OpenSheets.Services.Handlers
             _storage = storage;
         }
 
-        public override void Command(RegisterPrincipalCommand request, IServiceRouter router, RequestContext context)
+        public override void Command(CreateCommand<Principal> request, IServiceRouter router, RequestContext context)
         {
-            _storage.CreatePrincipal(request.Principal);
+            _storage.CreatePrincipal(request.Object);
 
-            router.Push<PrincipalCreatedEvent>(evt => { evt.PrincipalId = request.Principal.Id; });
+            router.Push<PrincipalCreatedEvent>(evt => { evt.PrincipalId = request.Object.Id; });
         }
     }
 }

@@ -32,17 +32,17 @@ namespace OpenSheets.Auth.Controllers
                 return Request.CreateResponse(HttpStatusCode.Unauthorized);
             }
 
-            GetIdentitiesResponse response = _router.Query<GetIdentitiesByPrincipalRequest, GetIdentitiesResponse>(new GetIdentitiesByPrincipalRequest()
+            GetCollectionResponse<Identity> response = _router.Query<GetIdentitiesByPrincipalRequest, GetCollectionResponse<Identity>>(new GetIdentitiesByPrincipalRequest()
             {
                 PrincipalId = Context.Principal.Id
             });
 
-            if (response.Identities == null)
+            if (response.Results == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK, response.Identities.Select(x => new
+            return Request.CreateResponse(HttpStatusCode.OK, response.Results.Select(x => new
             {
                 x.Id,
                 x.Name,
@@ -90,17 +90,17 @@ namespace OpenSheets.Auth.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            GetIdentityResponse response = _router.Query<GetIdentityByIdRequest, GetIdentityResponse>(new GetIdentityByIdRequest()
+            GetResponse<Identity> response = _router.Query<GetIdentityByIdRequest, GetResponse<Identity>>(new GetIdentityByIdRequest()
             {
                 IdentityId = identityId
             });
 
-            if (response.Identity == null)
+            if (response.Result == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK, response.Identity);
+            return Request.CreateResponse(HttpStatusCode.OK, response.Result);
         }
 
         //[HttpPost]
@@ -128,18 +128,18 @@ namespace OpenSheets.Auth.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-            
-            GetIdentityResponse response = _router.Query<GetIdentityByIdRequest, GetIdentityResponse>(new GetIdentityByIdRequest()
+
+            GetResponse<Identity> response = _router.Query<GetIdentityByIdRequest, GetResponse<Identity>>(new GetIdentityByIdRequest()
             {
                 IdentityId = identityId
             });
             
-            if (response.Identity == null)
+            if (response.Result == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            if (response.Identity.Version != version)
+            if (response.Result.Version != version)
             {
                 return Request.CreateResponse(HttpStatusCode.Conflict);
             }
@@ -175,17 +175,17 @@ namespace OpenSheets.Auth.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            GetIdentityResponse response = _router.Query<GetIdentityByIdRequest, GetIdentityResponse>(new GetIdentityByIdRequest()
+            GetResponse<Identity> response = _router.Query<GetIdentityByIdRequest, GetResponse<Identity>>(new GetIdentityByIdRequest()
             {
                 IdentityId = identityId
             });
 
-            if (response.Identity == null)
+            if (response.Result == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            if (Context.Principal.Id != response.Identity.PrincipalId && !Context.Identity.Flags.Contains(IdentityFlag.SysAdmin))
+            if (Context.Principal.Id != response.Result.PrincipalId && !Context.Identity.Flags.Contains(IdentityFlag.SysAdmin))
             {
                 return Request.CreateResponse(HttpStatusCode.Forbidden);
             }
@@ -193,7 +193,7 @@ namespace OpenSheets.Auth.Controllers
             _router.Command(new RemoveCommand<Identity>()
             {
                 ObjectId = identityId,
-                Object = response.Identity
+                Object = response.Result
             });
 
             return Request.CreateResponse(HttpStatusCode.OK);

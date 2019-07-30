@@ -105,13 +105,13 @@ namespace OpenSheets.File.Controllers
                 return Request.CreateResponse(HttpStatusCode.Forbidden);
             }
 
-            GetFileResponse fileResp = _router.Query<GetFileRequest, GetFileResponse>(new GetFileRequest()
+            GetResponse<Core.File> fileResp = _router.Query<GetFileByIdRequest, GetResponse<Core.File>>(new GetFileByIdRequest()
             {
                 OwnerId = userId,
                 FileId = fileId
             });
 
-            return Request.CreateResponse(HttpStatusCode.OK, fileResp.File);
+            return Request.CreateResponse(HttpStatusCode.OK, fileResp.Result);
         }
 
         [HttpPost]
@@ -167,17 +167,18 @@ namespace OpenSheets.File.Controllers
                 return Request.CreateResponse(HttpStatusCode.Forbidden, new { Reason = $"Attempted to bypass validation of {bypassLevel} level, only allowed { (Level?)Context.Principal.Metadata["Allowed-Bypass"] ?? Level.Warning }" });
             }
 
-            GetFileResponse response = _router.Query<GetFileByIdRequest, GetFileResponse>(new GetFileByIdRequest()
+            GetResponse<Core.File> response = _router.Query<GetFileByIdRequest, GetResponse<Core.File>>(new GetFileByIdRequest()
             {
-                FileId = fileId
+                FileId = fileId,
+                OwnerId = userId
             });
 
-            if (response.File == null)
+            if (response.Result == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            if (response.File.Version != version)
+            if (response.Result.Version != version)
             {
                 return Request.CreateResponse(HttpStatusCode.Conflict);
             }
@@ -230,12 +231,13 @@ namespace OpenSheets.File.Controllers
                 return Request.CreateResponse(HttpStatusCode.Forbidden, new { Reason = $"Attempted to bypass validation of {bypassLevel} level, only allowed { (Level?)Context.Principal.Metadata["Allowed-Bypass"] ?? Level.Warning }" });
             }
 
-            GetFileResponse response = _router.Query<GetFileByIdRequest, GetFileResponse>(new GetFileByIdRequest()
+            GetResponse<Core.File> response = _router.Query<GetFileByIdRequest, GetResponse<Core.File>>(new GetFileByIdRequest()
             {
-                FileId = fileId
+                FileId = fileId,
+                OwnerId = userId
             });
 
-            if (response.File == null)
+            if (response.Result == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
@@ -254,7 +256,7 @@ namespace OpenSheets.File.Controllers
                 return Request.CreateResponse(HttpStatusCode.Forbidden);
             }
 
-            if (response.File.Version != version)
+            if (response.Result.Version != version)
             {
                 return Request.CreateResponse(HttpStatusCode.Conflict);
             }
@@ -285,12 +287,12 @@ namespace OpenSheets.File.Controllers
         [Route("api/file/{userId}/{fileId}")]
         public HttpResponseMessage DeleteFile(Guid userId, Guid fileId)
         {
-            GetFileResponse response = _router.Query<GetFileByIdRequest, GetFileResponse>(new GetFileByIdRequest()
+            GetResponse<Core.File> response = _router.Query<GetFileByIdRequest, GetResponse<Core.File>>(new GetFileByIdRequest()
             {
                 FileId = fileId
             });
 
-            if (response.File == null)
+            if (response.Result == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
@@ -312,65 +314,10 @@ namespace OpenSheets.File.Controllers
             _router.Command(new RemoveCommand<Core.File>()
             {
                 ObjectId = fileId,
-                Object = response.File
+                Object = response.Result
             });
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
-    }
-
-    public class GetFileByIdRequest
-    {
-        public Guid FileId { get; set; }
-    }
-
-    public class GetFileResponse
-    {
-        public Core.File File { get; set; }
-    }
-
-    public class GetFileRequest
-    {
-        public Guid OwnerId { get; set; }
-        public Guid FileId { get; set; }
-    }
-
-    public class CheckPermissionRequest
-    {
-        public Guid IdentityId { get; set; }
-        public Guid OwnerId { get; set; }
-        public Guid FileId { get; set; }
-    }
-
-    public class CheckPermissionResponse
-    {
-        public Dictionary<FilePermissionAction, bool> EffectivePermissions { get; set; }
-    }
-
-    public class BuildPathRequest
-    {
-        public Guid SubjectId { get; set; }
-        public Guid FileId { get; set; }
-    }
-
-    public class BuildPathResponse
-    {
-        public string Path { get; set; }
-    }
-
-    public class EnumerateDirectoryRequest
-    {
-        public Guid SubjectId { get; set; }
-        public Guid DirectoryId { get; set; }
-        public Guid? RequesterId { get; set; }
-        public HashSet<FileFlag> IncludeFlags { get; set; }
-        public HashSet<FileFlag> ExcludeFlags { get; set; }
-        public string Filter { get; set; }
-    }
-
-    public class EnumerateDirectoryResponse
-    {
-        public Core.File Directory { get; set; }
-        public IEnumerable<Core.File> Contents { get; set; }
     }
 }
