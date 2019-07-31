@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OpenSheets.Storage
 {
-    public class StorageManagerConfigurer
+    public class StorageConfigurer
     {
         private string _defaultDatabase;
 
@@ -13,19 +13,19 @@ namespace OpenSheets.Storage
 
         private bool _finalized = false;
 
-        internal StorageManagerConfigurer()
+        internal StorageConfigurer()
         {
 
         }
 
-        public StorageManagerConfigurer DefaultDatabase(string database)
+        public StorageConfigurer DefaultDatabase(string database)
         {
             _defaultDatabase = database;
 
             return this;
         }
 
-        public StorageManagerConfigurer Collection<T>(string database, string collection)
+        public StorageConfigurer Collection<T>(string database, string collection)
         {
             if (_finalized)
             {
@@ -40,12 +40,12 @@ namespace OpenSheets.Storage
             return this;
         }
 
-        public StorageManagerConfigurer Collection<T>(string collection)
+        public StorageConfigurer Collection<T>(string collection)
         {
             return Collection<T>(null, collection);
         }
 
-        public StorageManagerConfigurer Collection<T>()
+        public StorageConfigurer Collection<T>()
         {
             return Collection<T>(null, null);
         }

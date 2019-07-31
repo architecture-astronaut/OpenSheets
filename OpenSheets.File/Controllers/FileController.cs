@@ -160,7 +160,7 @@ namespace OpenSheets.File.Controllers
 
         [HttpPut]
         [Route("api/file/{userId}/{fileId}")]
-        public HttpResponseMessage UpdateFile(Guid userId, Guid fileId, Guid version, [FromBody]Core.File fileData, [FromHeader(Name = "opensheets-bypass-level")] Level bypassLevel = Level.Information)
+        public HttpResponseMessage UpdateFile(Guid userId, Guid fileId, [FromUri]Guid version, [FromBody]Core.File fileData, [FromHeader(Name = "opensheets-bypass-level")] Level bypassLevel = Level.Information)
         {
             if (bypassLevel > Level.Warning && (Level)Context.Principal.Metadata["Allowed-Bypass"] < bypassLevel)
             {
@@ -224,7 +224,7 @@ namespace OpenSheets.File.Controllers
 
         [HttpPatch]
         [Route("api/file/{userId}/{fileId}")]
-        public HttpResponseMessage PatchFile(Guid userId, Guid fileId, Guid version, [FromBody]JsonPatchDocument<Core.File> model, [FromHeader(Name = "opensheets-bypass-level")] Level bypassLevel = Level.Information)
+        public HttpResponseMessage PatchFile(Guid userId, Guid fileId, [FromUri]Guid version, [FromBody]JsonPatchDocument<Core.File> model, [FromHeader(Name = "opensheets-bypass-level")] Level bypassLevel = Level.Information)
         {
             if (bypassLevel > Level.Warning && (Level)Context.Principal.Metadata["Allowed-Bypass"] < bypassLevel)
             {

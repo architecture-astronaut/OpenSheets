@@ -23,12 +23,12 @@ namespace OpenSheets.Storage
             return _typeMaps[typeof(T)].Item2 ?? throw new StorageConfigurationException();
         }
 
-        public static StorageManagerConfigurer Configure()
+        public static StorageConfigurer Configure()
         {
             return _configurer;
         }
 
-        private static StorageManagerConfigurer _configurer = new StorageManagerConfigurer();
+        private static StorageConfigurer _configurer = new StorageConfigurer();
 
         public Storage<T> CreateStorage<T>(IClientSession session)
         {
