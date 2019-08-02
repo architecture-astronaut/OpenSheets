@@ -22,6 +22,10 @@ export class SecurityService {
       this.http.post(this.securityUrl + 'register', model);
   }
 
+  refresh() : void {
+	  this.http.get(this.securityUrl + 'refresh')
+  }
+
   forgot(email: string) : void {
       this.http.post(this.securityUrl + 'forgot', email);
   }

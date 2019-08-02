@@ -65,7 +65,8 @@ namespace OpenSheets.Auth.Controllers
                 Tokens = Context.ServerConfig.AuthConfig.TokenSpecs.Select(x => new Token()
                 {
                     Type = x.Type,
-                    Expiration = Context.Clock.UtcNow.Add(x.Duration).UtcDateTime
+                    Expiration = Context.Clock.UtcNow.Add(x.Duration).UtcDateTime,
+                    PrincipalId = checkResp.PrincipalId
                 })
             });
 
@@ -108,6 +109,44 @@ namespace OpenSheets.Auth.Controllers
             }
 
             return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpGet]
+        [Route("api/security/refresh")]
+        public HttpResponseMessage Refresh([FromHeader(Name="Authorization")] string tokenStr)
+        {
+            Token token = Token.Parse(tokenStr);
+
+            DecodeTokenResponse decodeResp = _router.Query<DecodeTokenRequest, DecodeTokenResponse>(
+                new DecodeTokenRequest()
+                {
+                    Key = Context.ServerConfig.AuthConfig.TokenKey,
+                    Algorithm = Context.ServerConfig.AuthConfig.TokenAlgorithm,
+                    Data = Convert.FromBase64String(token.Data),
+                    IV = Convert.FromBase64String(token.InitValue)
+                });
+
+            if (decodeResp.Token.Type != TokenType.Bearer && decodeResp.Token.Type != TokenType.Refresh)
+            {
+                return Request.CreateResponse((HttpStatusCode)422, new {Errors = new[]{ "Authorization Token was not of expected types Bearer or Refresh!" }});
+            }
+
+            GenerateTokenResponse tokenResp = _router.Query<GenerateTokenRequest, GenerateTokenResponse>(new GenerateTokenRequest()
+            {
+                Key = Context.ServerConfig.AuthConfig.TokenKey,
+                Algorithm = Context.ServerConfig.AuthConfig.TokenAlgorithm,
+                Tokens = Context.ServerConfig.AuthConfig.TokenSpecs.Select(x => new Token()
+                {
+                    Type = x.Type,
+                    Expiration = Context.Clock.UtcNow.Add(x.Duration).UtcDateTime,
+                    PrincipalId = decodeResp.Token.PrincipalId
+                })
+            });
+
+            return Request.CreateResponse(HttpStatusCode.OK, new LoginResponse()
+            {
+                Tokens = tokenResp.Tokens.Select(x => x.ToString())
+            });
         }
 
         [HttpPost]
