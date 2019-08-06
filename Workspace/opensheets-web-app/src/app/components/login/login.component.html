@@ -1,0 +1,14 @@
+<div class="container">
+	<div class="row">
+		<input type="text" [(ngModel)]="username" placeholder="Username" />
+	</div>
+	<div class="row">
+		<input type="password" [(ngModel)]="password" placeholder="Password" />
+	</div>
+	<div class="row">
+		<a [routerLink]="['/forgot-password']" routerLinkActive="router-link-active">Forgot Password?</a> 
+	</div>
+	<div class="row">
+		<button (click)="tryLogin(username, password)">Sign In!</button>
+	</div>
+</div>

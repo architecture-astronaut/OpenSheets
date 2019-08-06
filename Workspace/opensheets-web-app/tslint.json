@@ -12,13 +12,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "opensheets",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "opensheets",
       "kebab-case"
     ],
     "import-blacklist": [
@@ -84,7 +84,8 @@
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true
+	"use-pipe-transform-interface": true,
+	"indent": false
   },
   "rulesDirectory": [
     "codelyzer"

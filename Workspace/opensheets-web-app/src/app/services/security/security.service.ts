@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { LoginModel } from '../models/login-model';
-import { RegisterModel } from '../models/register-model';
+import { token, loginResponse } from 'src/app/models/token';
+import { LoginModel } from 'src/app/models/login-model';
+import { RegisterModel } from 'src/app/models/register-model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class SecurityService {
 
   constructor(private http: HttpClient) { }
 
-  login(model: LoginModel) : Observable<string[]> {
-      return this.http.post<string[]>(this.securityUrl + 'login', model);
+  login(model: LoginModel) : Observable<loginResponse> {
+      return this.http.post<loginResponse>(this.securityUrl + 'login', model);
   }
 
   register(model: RegisterModel) : void {
@@ -30,7 +31,7 @@ export class SecurityService {
       this.http.post(this.securityUrl + 'forgot', email);
   }
 
-  reset(token: string, password: string) : Observable<string[]> {
-      return this.http.post<string[]>(this.securityUrl + 'reset?token=' + token, password);
+  reset(token: string, password: string) : Observable<loginResponse> {
+      return this.http.post<loginResponse>(this.securityUrl + 'reset?token=' + token, password);
   }
 }

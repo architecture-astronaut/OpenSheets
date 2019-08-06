@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 
-import { SecurityService } from '../security/security.service';
+import { SecurityService } from '../services/security/security.service';
 import { HttpStatusCode } from '../enums/http-status-code';
-import { StorageService, StorageKind } from '../storage/storage.service';
+import { StorageService, StorageKind } from '../services/storage/storage.service';
 import { ErrorCode } from '../enums/error-code';
 
 @Injectable()

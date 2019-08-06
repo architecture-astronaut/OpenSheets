@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using OpenSheets.Common;
 
 namespace OpenSheets.Auth.Responses
 {
     public class LoginResponse
     {
-        public IEnumerable<string> Tokens { get; set; }
+        public IEnumerable<Token> Tokens { get; set; }
     }
 }
