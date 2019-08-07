@@ -1,0 +1,3 @@
+<div *ngFor="let alert of alerts | async">
+	<ngb-alert [type]="alert.level" (close)="close(alert)" [dismissible]="alert.canClose">{{ alert.message }}</ngb-alert>
+</div>
