@@ -72,7 +72,7 @@ namespace OpenSheets.Auth.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, new LoginResponse()
             {
-                Tokens = tokenResp.Tokens.Select(x => x.ToString())
+                Tokens = tokenResp.Tokens
             });
         }
 

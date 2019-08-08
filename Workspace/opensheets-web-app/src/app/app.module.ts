@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { AlertDisplayComponent } from './components/alert-display/alert-display.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { AlertDisplayComponent } from './components/alert-display/alert-display.
     AppComponent,
     LoginComponent,
     AlertDisplayComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
