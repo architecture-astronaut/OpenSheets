@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginModalComponent } from '../modals/login-modal/login-modal.component';
 
 @Component({
   selector: 'opensheets-logout-header-panel',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogoutHeaderPanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
   }
 
+  openSignIn() {
+	const modalRef = this.modalService.open(LoginModalComponent, { centered: true, backdropClass: 'stripe-backdrop'});
+  }
 }

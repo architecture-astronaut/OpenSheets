@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IdentityManagerService } from 'src/app/services/identity-manager/identity-manager.service';
-import { Identity } from 'src/app/models/partial-identity';
 import { Observable } from 'rxjs';
+import { IdentityService } from 'src/app/services/identity/identity.service';
+import { Identity } from 'src/app/models/identity';
 
 @Component({
   selector: 'opensheets-login-header-panel',
@@ -10,10 +10,10 @@ import { Observable } from 'rxjs';
 })
 export class LoginHeaderPanelComponent implements OnInit {
 public identity$ : Observable<Identity>;
-  constructor(private identityManager : IdentityManagerService) { }
+  constructor(private identityService : IdentityService) { }
 
   ngOnInit() {
-	  this.identity$ = this.identityManager.getCurrentIdentity();
+	  this.identity$ = this.identityService.getCurrentIdentity();
   }
 
 }

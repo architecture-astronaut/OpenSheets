@@ -1,16 +1,13 @@
 <nav class="navbar">
-	<div class="navbar-brand">
-		<a class="navbar-item">
+	<div class="mr-auto">
+		<a class="navbar-brand text-dark" [routerLink]="['/home']">
 			<img src="">
 			<span class="font-weight-bold">O</span>pen
 			<span class="font-weight-bold">S</span>heets
 			<fa-icon [icon]="['fas', 'book-open']"></fa-icon>
 		</a>
 	</div>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-	<div id="navbarNavDropdown" class="navbar-collapse collapse">
+	<div class="">
 		<opensheets-logout-header-panel *ngIf="!(loggedIn | async)"></opensheets-logout-header-panel>
 		<opensheets-login-header-panel *ngIf="loggedIn | async"></opensheets-login-header-panel>
 	</div>

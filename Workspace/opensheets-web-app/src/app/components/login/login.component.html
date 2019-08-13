@@ -1,14 +1,16 @@
 <div class="container">
-	<div class="row">
-		<input type="text" [(ngModel)]="username" placeholder="Username" />
+	<div class="row mb-1">
+		<label for="loginUsername"><fa-icon [icon]="['fas', 'user']"></fa-icon>&nbsp;Username</label>
+		<input type="text" [(ngModel)]="username" placeholder="Username" class="my-1 form-control" id="loginUsername" />
+	</div>
+	<div class="row mb-1">
+		<label for="loginPassword"><fa-icon [icon]="['fas', 'key']"></fa-icon>&nbsp;Password</label>
+		<input type="password" [(ngModel)]="password" placeholder="Password" class="my-1 form-control" id="loginPassword" />
+	</div>
+	<div class="row mb-1">
+		<button class="btn btn-link" (click)="openForgotPassword()">Forgot Password?</button> 
 	</div>
 	<div class="row">
-		<input type="password" [(ngModel)]="password" placeholder="Password" />
-	</div>
-	<div class="row">
-		<a [routerLink]="['/forgot-password']" routerLinkActive="router-link-active">Forgot Password?</a> 
-	</div>
-	<div class="row">
-		<button (click)="tryLogin(username, password)">Sign In!</button>
+		<button class="btn btn-outline-primary mx-auto" (click)="tryLogin(username, password)">Sign In!</button>
 	</div>
 </div>

@@ -13,7 +13,7 @@ export class AlertService {
 
   	constructor() { }
 
-	push(message: string, level: AlertLevel, canClose: boolean, closeTime: int = -1): Promise<Guid> {
+	push(message: string, level: AlertLevel, canClose: boolean, closeTime: number = -1): Promise<Guid> {
 		let promise = new Promise<Guid>((resolve, reject) => {
 			let alert = new Alert();
 

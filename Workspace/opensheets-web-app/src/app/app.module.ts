@@ -16,6 +16,10 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { LogoutHeaderPanelComponent } from './components/logout-header-panel/logout-header-panel.component';
 import { LoginHeaderPanelComponent } from './components/login-header-panel/login-header-panel.component';
+import { StorageServiceModule } from 'angular-webstorage-service';
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './components/pages/home/home.component';
+import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
 
 
 @NgModule({
@@ -27,16 +31,21 @@ import { LoginHeaderPanelComponent } from './components/login-header-panel/login
     FooterComponent,
     LogoutHeaderPanelComponent,
     LoginHeaderPanelComponent,
+    HomeComponent,
+    LoginModalComponent,
   ],
   imports: [
     BrowserModule,
 	AppRoutingModule,
 	FormsModule	,
 	NgbModule,
-	FontAwesomeModule
+	FontAwesomeModule,
+	StorageServiceModule ,
+	HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [LoginModalComponent]
 })
 export class AppModule {
 	constructor(library: FaIconLibrary){

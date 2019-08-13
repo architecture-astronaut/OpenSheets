@@ -74,7 +74,7 @@ export class AuthService {
 
 	Object.assign(bearToken, JSON.parse(bearTokenStr));
 
-	if(bearToken && bearToken.expiration.getDate > Date.now)
+	if(bearTokenStr != null && bearToken.expiration.getDate > Date.now)
 	{
 		return true;
 	}
@@ -85,7 +85,7 @@ export class AuthService {
 
 	Object.assign(refrToken, JSON.parse(refrTokenStr));
 
-	if(refrToken && refrToken.expiration.getDate > Date.now)
+	if(refrTokenStr != null && refrToken.expiration.getDate > Date.now)
 	{
 		return true;
 	}
