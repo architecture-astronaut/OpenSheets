@@ -11,3 +11,7 @@ export enum IdentityKind {
     player,
     author
 }
+
+export class Identity{
+	
+}

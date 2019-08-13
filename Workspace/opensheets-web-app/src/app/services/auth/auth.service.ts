@@ -3,13 +3,25 @@ import { StorageService } from '../storage/storage.service';
 import { token, tokenType } from 'src/app/models/token';
 import { SecurityService } from '../security/security.service';
 import { LoginModel } from 'src/app/models/login-model';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { StorageEventType } from '../storage/StorageUpdateEvent';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+	private loggedInSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
 
-  constructor(private storageService: StorageService, private securityService: SecurityService) { }
+  constructor(private storageService: StorageService, private securityService: SecurityService) {
+	  this.storageService.watch().subscribe(evt => {
+		if(evt.type == StorageEventType.clear 
+			|| ((evt.type == StorageEventType.remove || evt.type == StorageEventType.set) 
+				&& (evt.key == 'bearer-token' || evt.key == 'refresh-token')))
+		{
+			this.pulse();
+		}
+	  });
+   }
 
   public login(username: string, password: string) : Promise<void> {
 	let promise = new Promise<void>((resolve, reject) => {
@@ -34,6 +46,8 @@ export class AuthService {
 			});
 
 			resolve();
+
+			this.pulse();
 		});
 	});	
 
@@ -46,6 +60,8 @@ export class AuthService {
 		this.storageService.remove('bearer-token');
 
 		resolve();
+
+		this.pulse();
 	});
 
 	return promise;
@@ -75,5 +91,13 @@ export class AuthService {
 	}
 
 	return false;
+  }
+
+  public pulse() : void {
+	  this.loggedInSubject.next(this.isAuthenticated());
+  }
+
+  public watch() : Observable<boolean>{
+	  return this.loggedInSubject.asObservable();
   }
 }

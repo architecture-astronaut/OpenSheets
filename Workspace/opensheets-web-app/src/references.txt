@@ -1,0 +1,4 @@
+https://github.com/FortAwesome/angular-fontawesome
+https://ng-bootstrap.github.io/#/components/alert/examples
+
+https://scotch.io/courses/build-your-first-angular-website/creating-an-angular-header-and-footer
