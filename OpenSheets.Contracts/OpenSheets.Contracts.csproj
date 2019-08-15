@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Communication\SendCommunication.cs" />
     <Compile Include="Commands\CreateCommand.cs" />
     <Compile Include="Commands\RemoveCommand.cs" />
     <Compile Include="Commands\UpdateCommand.cs" />

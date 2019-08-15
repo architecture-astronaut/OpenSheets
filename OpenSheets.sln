@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSheets.File", "OpenShee
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSheets.Api", "OpenSheets.Api\OpenSheets.Api.csproj", "{E04C8720-723E-48E8-B67C-134104EC17E4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{1178FA64-E045-4443-A079-B69CCFB40676}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSheets.Service.Comm", "OpenSheets.Service.Comm\OpenSheets.Service.Comm.csproj", "{2A070C52-C570-411B-9DA4-BF29F0D8A0E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +69,10 @@ Global
 		{E04C8720-723E-48E8-B67C-134104EC17E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E04C8720-723E-48E8-B67C-134104EC17E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E04C8720-723E-48E8-B67C-134104EC17E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A070C52-C570-411B-9DA4-BF29F0D8A0E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A070C52-C570-411B-9DA4-BF29F0D8A0E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A070C52-C570-411B-9DA4-BF29F0D8A0E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A070C52-C570-411B-9DA4-BF29F0D8A0E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +80,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{36AA402E-67BC-4C4B-8CF7-115C0705F3D0} = {0BA55FF8-EC55-4040-B433-5B9182989553}
 		{14615C30-7416-4A73-B3F3-1843FA208844} = {0BA55FF8-EC55-4040-B433-5B9182989553}
+		{2A070C52-C570-411B-9DA4-BF29F0D8A0E4} = {1178FA64-E045-4443-A079-B69CCFB40676}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AF856EAF-03FA-481D-8C23-1A05BE40B411}

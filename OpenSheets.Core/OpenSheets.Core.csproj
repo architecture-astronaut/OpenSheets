@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Authorization.cs" />
     <Compile Include="AuthorizationKind.cs" />
+    <Compile Include="Communication\Message.cs" />
     <Compile Include="Dependency\DependencyRegistrar.cs" />
     <Compile Include="Hexagon\ContextScope.cs" />
     <Compile Include="Hexagon\ContextScopeManager.cs" />
