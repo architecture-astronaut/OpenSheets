@@ -55,6 +55,7 @@
     <Compile Include="Commands\PatchCommand.cs" />
     <Compile Include="Commands\Security\SendPasswordResetCommand.cs" />
     <Compile Include="Commands\Security\SetPasswordCommand.cs" />
+    <Compile Include="Events\Principal\RegisteredPrincipalEvent.cs" />
     <Compile Include="Requests\File\BuildPathRequest.cs" />
     <Compile Include="Requests\File\CheckPermissionRequest.cs" />
     <Compile Include="Requests\File\EnumerateDirectoryRequest.cs" />
@@ -110,7 +111,6 @@
     <Folder Include="Commands\Principal\" />
     <Folder Include="Events\File\" />
     <Folder Include="Events\Identity\" />
-    <Folder Include="Events\Principal\" />
     <Folder Include="Events\Security\" />
     <Folder Include="Responses\Identity\" />
     <Folder Include="Responses\Principal\" />

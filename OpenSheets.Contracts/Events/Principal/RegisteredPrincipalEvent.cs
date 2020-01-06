@@ -4,15 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenSheets.Core.Communication
+namespace OpenSheets.Contracts.Events.Principal
 {
-    public enum SmsFlags
+    public interface RegisteredPrincipalEvent
     {
-
-    }
-
-    public enum EmailFlags
-    {
-
+        Guid PrincipalId { get; set; }
     }
 }

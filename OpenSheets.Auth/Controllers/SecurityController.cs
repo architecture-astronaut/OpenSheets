@@ -11,6 +11,7 @@ using OpenSheets.Auth.Responses;
 using OpenSheets.Common;
 using OpenSheets.Contracts.Commands;
 using OpenSheets.Contracts.Events;
+using OpenSheets.Contracts.Events.Principal;
 using OpenSheets.Contracts.Requests;
 using OpenSheets.Contracts.Responses;
 using OpenSheets.Core;
@@ -107,6 +108,8 @@ namespace OpenSheets.Auth.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.Conflict);
             }
+
+            _router.Push<RegisteredPrincipalEvent>(evt => { evt.PrincipalId = principal.Id; });
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
